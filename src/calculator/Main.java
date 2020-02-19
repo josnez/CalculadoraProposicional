@@ -4,10 +4,11 @@ import pila.*;
 
 public class Main {
 
+	private static int numVar;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println(hallarExpresion());
-		
+		Operaciones op = new Operaciones(numVar);
 	}
 	
 	public static String hallarExpresion() {
@@ -17,7 +18,7 @@ public class Main {
 		
 		String expresion = lector.next();
 		char c;
-		int p=0,r=0,s=0,q=0, numVar;
+		int p=0,r=0,s=0,q=0;
 		
 		for(int i=0; i<expresion.length(); i++) {
 			c = expresion.charAt(i);
