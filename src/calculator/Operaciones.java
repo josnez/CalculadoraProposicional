@@ -6,11 +6,14 @@ public class Operaciones {
 	private int q[];
 	private int r[];
 	private int s[];
+	private int op1[];
+	private int op2[];
+	private int op3[];
+	private int op4[];
 	private int numVar=0;
 	
-	public Operaciones(int numVar) {
+	public Operaciones(int numVar, int numOp) {
 		this.numVar=numVar;
-		System.out.println(this.numVar);
 		if(numVar==2) {
 			p = new int[(int) Math.pow(2,2)];
 			q = new int[(int) Math.pow(2,2)];
@@ -53,6 +56,28 @@ public class Operaciones {
 		}
 	}
 	
+	public int[] conjuncion(int x[],int y[]) {
+		int l[] = new int[(int)Math.pow(2, numVar)];
+		for(int i=0; i<l.length; i++) {
+			if(x[i]==1 && y[i]==1)l[i]=1;
+			else l[i]=0;
+		}
+		return l;
+	}
+	
+	public int[] disyuncion(int x[],int y[]) {
+		int l[] = new int[(int)Math.pow(2, numVar)];
+		for(int i=0; i<l.length; i++) {
+			if(x[i]==0 && y[i]==0)l[i]=0;
+			else l[i]=1;
+		}
+		return l;
+	}
+
+	public void implicacion(int x[],int y[]) {
+	
+	}
+	
 	public void imprimir() {
 		switch (numVar) {
 		case 2:
@@ -85,5 +110,38 @@ public class Operaciones {
 	public int[] getS() {
 		return s;
 	}
+
+	public int[] getOp1() {
+		return op1;
+	}
+
+	public void setOp1(int[] op1) {
+		this.op1 = op1;
+	}
+
+	public int[] getOp2() {
+		return op2;
+	}
+
+	public void setOp2(int[] op2) {
+		this.op2 = op2;
+	}
+
+	public int[] getOp3() {
+		return op3;
+	}
+
+	public void setOp3(int[] op3) {
+		this.op3 = op3;
+	}
+
+	public int[] getOp4() {
+		return op4;
+	}
+
+	public void setOp4(int[] op4) {
+		this.op4 = op4;
+	}
+	
 	
 }
