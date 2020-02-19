@@ -36,7 +36,7 @@ public class Main {
 			}
 		}
 		numVar=p+q+r+s;
-		
+		System.out.println(numVar);
 		System.out.println();
 		return exp;
 	}
