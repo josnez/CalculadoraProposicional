@@ -18,25 +18,21 @@ public class Operaciones {
 			p = new int[(int) Math.pow(2,2)];
 			q = new int[(int) Math.pow(2,2)];
 			inicializar();
-			imprimir();
 		}else if(numVar==3) {
 			p = new int[(int) Math.pow(2,3)];
 			q = new int[(int) Math.pow(2,3)];
 			r = new int[(int) Math.pow(2,3)];
 			inicializar();
-			imprimir();
 		}else if(numVar==4) {
 			p = new int[(int) Math.pow(2,4)];
 			q = new int[(int) Math.pow(2,4)];
 			r = new int[(int) Math.pow(2,4)];
 			s = new int[(int) Math.pow(2,4)];
 			inicializar();
-			imprimir();
 		}
 	}
 	
 	public void inicializar() {
-		System.out.println(numVar);
 		switch (numVar) {
 		case 2:
 			p[0]=1;p[1]=1;p[2]=0;p[3]=0;
@@ -59,9 +55,12 @@ public class Operaciones {
 	public int[] conjuncion(int x[],int y[]) {
 		int l[] = new int[(int)Math.pow(2, numVar)];
 		for(int i=0; i<l.length; i++) {
-			if(x[i]==1 && y[i]==1)l[i]=1;
-			else l[i]=0;
+			if((x[i]==1) && (y[i]==1))
+				l[i]=1;
+			else 
+				l[i]=0;
 		}
+		imprimir(x, y, l, "Conjuncion");
 		return l;
 	}
 	
@@ -71,31 +70,55 @@ public class Operaciones {
 			if(x[i]==0 && y[i]==0)l[i]=0;
 			else l[i]=1;
 		}
+		imprimir(x, y, l, "Disyuncion");
 		return l;
 	}
 
-	public void implicacion(int x[],int y[]) {
-	
+	public int[] implicacion(int x[],int y[]) {
+		int l[] = new int[(int)Math.pow(2, numVar)];
+		for(int i=0; i<l.length; i++) {
+			if(x[i]==1 && y[i]==0)l[i]=0;
+			else l[i]=1;
+		}
+		imprimir(x, y, l, "Implicacion");
+		return l;
 	}
 	
-	public void imprimir() {
-		switch (numVar) {
-		case 2:
-			for(int i=0; i<4; i++) {
-				System.out.println(p[i]+" "+q[i]);
-			}
-			break;
-		case 3:
-			for(int i=0; i<8; i++) {
-				System.out.println(p[i]+" "+q[i]+" "+r[i]);
-			}
-			break;
-		case 4:
-			for(int i=0; i<16; i++) {
-				System.out.println(p[i]+" "+q[i]+" "+r[i]+" "+s[i]);
-			}
-			break;
+	public int[] dobleImplicacion(int x[],int y[]) {
+		int l[] = new int[(int)Math.pow(2, numVar)];
+		for(int i=0; i<l.length; i++) {
+			if(x[i]==1 && y[i]==1)l[i]=1;
+			else if (x[i]==0 && y[i]==0)l[i]=1;
+			else l[i]=0;
 		}
+		imprimir(x, y, l, "Doble Implicacion");
+		return l;
+	}
+	
+	public int[] negacion(int x[]) {
+		int l[] = new int[(int)Math.pow(2, numVar)];
+		for(int i=0; i<l.length; i++) {
+			if(x[i]==1)l[i]=0;
+			else l[i]=1;
+		}
+		imprimirNeg(x, l, " Negacion");
+		return l;
+	}
+	
+	private void imprimirNeg(int[] x, int[] l, String c) {
+		System.out.println(" "+c);
+		for(int i=0; i<x.length; i++) {
+			System.out.println("| "+x[i]+" | "+l[i]+" |");
+		}
+		System.out.println();
+	}
+
+	public void imprimir(int x[],int y[],int l[], String c) {
+		System.out.println(" "+c);
+		for(int i=0; i<x.length; i++) {
+			System.out.println("| "+x[i]+" "+y[i]+" | "+l[i]+" |");
+		}
+		System.out.println();
 	}
 	
 	public int[] getP() {

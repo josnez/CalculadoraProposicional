@@ -1,18 +1,24 @@
 package calculator;
 import java.util.Scanner;
 import pila.*;
+import vista.VentanaPrincipal;
 
 public class Main {
 
 	private static int numVar=0, numOpe;
-	private static char[] ordPro = {'.','.','.','.','.','.','.','.','.','.','.','.'}, auxOrdPro = {'.','.','.','.','1','2','3','4'};
+	private static char[] ordPro, auxOrdPro = {'.','.','.','.','1','2','3','4'};
 	private static Operaciones op;
+	private static VentanaPrincipal v;
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		op = new Operaciones(numVar, numOpe);
+	public Main(VentanaPrincipal v) {
+		this.v=v;
+	}
+	public void iniciar() {
+		numVar=0;
 		String exp = hallarExpresion();
-		System.out.println(exp);
+		op = null;
+		op = new Operaciones(numVar, numOpe);
+		System.out.println(exp+"\n");
 		hallarSolucion(exp);
 		
 	}
@@ -20,10 +26,13 @@ public class Main {
 	public static String hallarExpresion() {
 		String exp="";
 		@SuppressWarnings("resource")
-		Scanner lector = new Scanner(System.in);
 		Pila pilita = new PilaArray();
 		
-		String expresion = lector.next();
+		String expresion = v.getTxtExpresion().getText();
+		ordPro = new char[expresion.length()];
+		for(int i=0;i<expresion.length();i++) {
+			ordPro[i]='.';
+		}
 		char c;
 		int y=0,o=0;
 		
@@ -33,6 +42,9 @@ public class Main {
 			case '(': break;
 			case 'y': pilita.push(c);y+=1;break;
 			case 'o': pilita.push(c);o+=1;break;
+			case 'i': pilita.push(c);break;
+			case 'd': pilita.push(c);break;
+			case '-': pilita.push(c);
 			case 'p':exp=exp+c;ordPro[i]='p';numVar++;break;
 			case 'q':exp=exp+c;ordPro[i]='q';numVar++;break;
 			case 'r':exp=exp+c;ordPro[i]='r';numVar++;break;
@@ -93,12 +105,71 @@ public class Main {
 					pilita.push('4');
 				}
 				break;
+			case 'i': 
+				x = op.implicacion(obtPro(pilita.pop()), obtPro(pilita.pop()));
+				numOp++;
+				if(numOp==1) {
+					op.setOp1(x);
+					pilita.push('1');
+				}else if(numOp==2) {
+					op.setOp2(x);
+					pilita.push('2');
+				}else if(numOp==3) {
+					op.setOp3(x);
+					pilita.push('3');
+				}else {
+					op.setOp4(x);
+					pilita.push('4');
+				}
+				break;
+			case 'd': 
+				x = op.dobleImplicacion(obtPro(pilita.pop()), obtPro(pilita.pop()));
+				numOp++;
+				if(numOp==1) {
+					op.setOp1(x);
+					pilita.push('1');
+				}else if(numOp==2) {
+					op.setOp2(x);
+					pilita.push('2');
+				}else if(numOp==3) {
+					op.setOp3(x);
+					pilita.push('3');
+				}else {
+					op.setOp4(x);
+					pilita.push('4');
+				}
+				break;
+			case '-': 
+				x = op.negacion(obtPro(pilita.pop()));
+				numOp++;
+				if(numOp==1) {
+					op.setOp1(x);
+					pilita.push('1');
+				}else if(numOp==2) {
+					op.setOp2(x);
+					pilita.push('2');
+				}else if(numOp==3) {
+					op.setOp3(x);
+					pilita.push('3');
+				}else {
+					op.setOp4(x);
+					pilita.push('4');
+				}
+				break;
 			case 'p':pilita.push(c);break;
 			case 'q':pilita.push(c);break;
 			case 'r':pilita.push(c);break;
 			case 's':pilita.push(c);break;
 			}
 		}
+		int rt=0,rf=0;
+		for(int i =0; i<x.length;i++) {
+			if(x[i]==1)rt++;
+			else if(x[i]==0)rf++;
+		}
+		if(rt==x.length)System.out.println("Tautologia");
+		else if(rf==x.length)System.out.println("Falacia");
+		else System.out.println("Contingencia");
 	}
 	
 	public static void ordPro(String expresion) {
