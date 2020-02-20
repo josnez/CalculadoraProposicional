@@ -26,9 +26,6 @@ public class VentanaPrincipal {
 	private JTextField txtExpresion;
 	private Main m = new Main(this);
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
