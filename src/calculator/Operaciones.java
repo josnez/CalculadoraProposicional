@@ -15,7 +15,6 @@ public class Operaciones {
 	public Operaciones(int numVar, int numOp) {
 		this.numVar=numVar;
 		if(numVar==2) {
-			System.out.println("Hl");
 			p = new int[(int) Math.pow(2,2)];
 			q = new int[(int) Math.pow(2,2)];
 			inicializar();
@@ -55,7 +54,6 @@ public class Operaciones {
 	
 	public int[] conjuncion(int x[],int y[]) {
 		int l[] = new int[(int)Math.pow(2, numVar)];
-		System.out.println(x.length+" "+ y.length);
 		for(int i=0; i<l.length; i++) {
 			if((x[i]==1) && (y[i]==1))
 				l[i]=1;

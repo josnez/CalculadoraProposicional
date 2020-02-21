@@ -38,12 +38,23 @@ public class Main {
 		for(int i=0; i<expresion.length(); i++) {
 			c = expresion.charAt(i);
 			switch (c) {
-			case '(': break;
-			case 'y': pilita.push(c);y+=1;break;
-			case 'o': pilita.push(c);o+=1;break;
-			case 'i': pilita.push(c);break;
-			case 'd': pilita.push(c);break;
-			case '-': pilita.push(c);break;
+			case '(': 
+			break;
+			case 'y': 
+				pilita.push(c);
+				break;
+			case 'o': 				
+				pilita.push(c);
+				break;
+			case 'i': 
+				pilita.push(c);
+				break;
+			case 'd': 
+				pilita.push(c);
+				break;
+			case '-': 
+				pilita.push(c);
+				break;
 			case 'p':exp=exp+c;ordPro[i]='p';
 				if(numVarP==0)
 					numVarP++;
@@ -57,7 +68,13 @@ public class Main {
 					numVarR++;
 				break;
 			case ' ':System.out.print(" ");break;
-			case ')':exp=exp+pilita.pop();break;
+			case ')':
+				char aux1=(char) pilita.pop();
+				if(aux1=='-')
+					exp=exp+aux1+pilita.pop();
+				else
+					exp=exp+aux1;
+				break;
 			default: System.out.print("Expresion no valida");
 			}
 		}
@@ -87,12 +104,9 @@ public class Main {
 				}else if(numOp==2) {
 					op.setOp2(x);
 					pilita.push('2');
-				}else if(numOp==3) {
+				}else {
 					op.setOp3(x);
 					pilita.push('3');
-				}else {
-					op.setOp4(x);
-					pilita.push('4');
 				}
 				break;
 			case 'o': 
@@ -104,12 +118,9 @@ public class Main {
 				}else if(numOp==2) {
 					op.setOp2(x);
 					pilita.push('2');
-				}else if(numOp==3) {
+				}else {
 					op.setOp3(x);
 					pilita.push('3');
-				}else {
-					op.setOp4(x);
-					pilita.push('4');
 				}
 				break;
 			case 'i': 
@@ -121,12 +132,9 @@ public class Main {
 				}else if(numOp==2) {
 					op.setOp2(x);
 					pilita.push('2');
-				}else if(numOp==3) {
+				}else {
 					op.setOp3(x);
 					pilita.push('3');
-				}else {
-					op.setOp4(x);
-					pilita.push('4');
 				}
 				break;
 			case 'd': 
@@ -138,12 +146,9 @@ public class Main {
 				}else if(numOp==2) {
 					op.setOp2(x);
 					pilita.push('2');
-				}else if(numOp==3) {
+				}else {
 					op.setOp3(x);
 					pilita.push('3');
-				}else {
-					op.setOp4(x);
-					pilita.push('4');
 				}
 				break;
 			case '-': 
@@ -155,12 +160,9 @@ public class Main {
 				}else if(numOp==2) {
 					op.setOp2(x);
 					pilita.push('2');
-				}else if(numOp==3) {
+				}else {
 					op.setOp3(x);
 					pilita.push('3');
-				}else {
-					op.setOp4(x);
-					pilita.push('4');
 				}
 				break;
 			case 'p':pilita.push(c);break;
@@ -221,7 +223,6 @@ public class Main {
 			if(auxOrdPro[i]==(char)object)aux=i;
 		}
 		if(aux==0) {
-			System.out.println("Get p");
 			return op.getP();
 		}
 		else if(aux==1)return op.getQ();
