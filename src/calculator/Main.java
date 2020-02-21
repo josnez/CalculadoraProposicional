@@ -5,7 +5,7 @@ import vista.VentanaPrincipal;
 
 public class Main {
 
-	private static int numVar=0, numOpe;
+	private static int numVar=0,numVarP=0, numVarQ=0, numVarR=0, numOpe;
 	private static char[] ordPro, auxOrdPro = {'.','.','.','.','1','2','3','4'};
 	private static Operaciones op;
 	private static VentanaPrincipal v;
@@ -25,7 +25,6 @@ public class Main {
 	
 	public static String hallarExpresion() {
 		String exp="";
-		@SuppressWarnings("resource")
 		Pila pilita = new PilaArray();
 		
 		String expresion = v.getTxtExpresion().getText();
@@ -44,17 +43,25 @@ public class Main {
 			case 'o': pilita.push(c);o+=1;break;
 			case 'i': pilita.push(c);break;
 			case 'd': pilita.push(c);break;
-			case '-': pilita.push(c);
-			case 'p':exp=exp+c;ordPro[i]='p';numVar++;break;
-			case 'q':exp=exp+c;ordPro[i]='q';numVar++;break;
-			case 'r':exp=exp+c;ordPro[i]='r';numVar++;break;
-			case 's':exp=exp+c;ordPro[i]='s';numVar++;break;
+			case '-': pilita.push(c);break;
+			case 'p':exp=exp+c;ordPro[i]='p';
+				if(numVarP==0)
+					numVarP++;
+				break;
+			case 'q':exp=exp+c;ordPro[i]='q';
+				if(numVarQ==0)
+					numVarQ++;
+				break;
+			case 'r':exp=exp+c;ordPro[i]='r';
+				if(numVarR==0)
+					numVarR++;
+				break;
 			case ' ':System.out.print(" ");break;
 			case ')':exp=exp+pilita.pop();break;
 			default: System.out.print("Expresion no valida");
 			}
 		}
-		
+		numVar=numVarP+numVarQ+numVarR;
 		ordPro(expresion);
 		
 		
@@ -180,7 +187,7 @@ public class Main {
 				aux++;
 				if(aux==1) {
 					auxOrdPro[0]=ordPro[i];
-				}else {
+				}else if(aux==2){
 					auxOrdPro[1]=ordPro[i];
 				}
 			}else if(numVar==3 && ordPro[i]!='.'){
@@ -213,7 +220,10 @@ public class Main {
 		for(int i=0; i<8; i++) {
 			if(auxOrdPro[i]==(char)object)aux=i;
 		}
-		if(aux==0)return op.getP();
+		if(aux==0) {
+			System.out.println("Get p");
+			return op.getP();
+		}
 		else if(aux==1)return op.getQ();
 		else if(aux==2)return op.getR();
 		else if(aux==3)return op.getS();
