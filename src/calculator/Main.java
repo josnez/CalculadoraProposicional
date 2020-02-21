@@ -107,6 +107,7 @@ public class Main {
 				}else {
 					op.setOp3(x);
 					pilita.push('3');
+					numOp=0;
 				}
 				break;
 			case 'o': 
@@ -121,6 +122,7 @@ public class Main {
 				}else {
 					op.setOp3(x);
 					pilita.push('3');
+					numOp=0;
 				}
 				break;
 			case 'i': 
@@ -135,6 +137,7 @@ public class Main {
 				}else {
 					op.setOp3(x);
 					pilita.push('3');
+					numOp=0;
 				}
 				break;
 			case 'd': 
@@ -149,6 +152,7 @@ public class Main {
 				}else {
 					op.setOp3(x);
 					pilita.push('3');
+					numOp=0;
 				}
 				break;
 			case '-': 
@@ -163,6 +167,7 @@ public class Main {
 				}else {
 					op.setOp3(x);
 					pilita.push('3');
+					numOp=0;
 				}
 				break;
 			case 'p':pilita.push(c);break;
